@@ -14,7 +14,7 @@ class Nino extends Model
     protected $primaryKey = 'rut_nino';
     public $incrementing = false;
     protected $keyType = 'integer';
-    public $timestamps = 'false';
+    public $timestamps = false;
 
     public function nivel(){
         return $this->belongsTo(Nivel::class);

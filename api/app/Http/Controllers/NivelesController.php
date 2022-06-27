@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Evento;
+use App\Models\Nivel;
 use Illuminate\Http\Request;
 
-class EventoController extends Controller
+class NivelesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class EventoController extends Controller
      */
     public function index()
     {
-        return Evento::orderBy('nombre')->get();
+        return Nivel::orderBy('nombre')->get();
     }
 
     /**
@@ -25,10 +25,10 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        $evento = new Evento;
-        $evento->id = $request->id;
-        $evento->nombre = $request->nombre;
-        $evento->save();
+        $nivel = new Nivel;
+        $nivel->id = $request->id;
+        $nivel->nombre = $request->nombre;
+        $nivel->save();
     }
 
     /**
@@ -37,9 +37,9 @@ class EventoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Evento $evento)
+    public function show(Nivel $nivel)
     {
-        return $evento;
+        return $nivel;
     }
 
     /**
@@ -49,12 +49,12 @@ class EventoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Evento $evento)
+    public function update(Request $request, Nivel $nivel)
     {
-        $evento->id = $request->id;
-        $evento->nombre = $request->nombre;
-        $evento->save();
-        return $evento;
+        $nivel->id = $request->id;
+        $nivel->nombre = $request->nombre;
+        $nivel->save();
+        return $nivel;
     }
 
     /**
@@ -63,8 +63,8 @@ class EventoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Evento $evento)
+    public function destroy(Nivel $nivel)
     {
-        $evento->delete();
+        $nivel->delete();
     }
 }

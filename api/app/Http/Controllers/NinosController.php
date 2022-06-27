@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Nino;
 use Illuminate\Http\Request;
 
-class NinoController extends Controller
+class NinosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,7 +30,6 @@ class NinoController extends Controller
         $nino->nombre = $request->nombre;
         $nino->apellido = $request->apellido;
         $nino->id_nivel = $request->id_nivel;
-        $nino->id_evento = $request->id_evento;
         $nino->save();
     }
 
@@ -58,7 +57,6 @@ class NinoController extends Controller
         $nino->nombre = $request->nombre;
         $nino->apellido = $request->apellido;
         $nino->id_nivel = $request->id_nivel;
-        $nino->id_evento = $request->id_evento;
         $nino->save();
         return $nino;
     }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Educadora;
+use App\Models\Evento;
 use Illuminate\Http\Request;
 
-class EducadoraController extends Controller
+class EventosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class EducadoraController extends Controller
      */
     public function index()
     {
-        return Educadora::orderBy('rut_educadora')->get();
+        return Evento::orderBy('nombre')->get();
     }
 
     /**
@@ -25,12 +25,11 @@ class EducadoraController extends Controller
      */
     public function store(Request $request)
     {
-        $educadora = new Educadora();
-        $educadora->rut_educadora = $request->rut_educadora;
-        $educadora->nombre = $request->nombre;
-        $educadora->apellido = $request->apellido;
-        $educadora->id_nivel = $request->id_nivel;
-        $educadora->save();
+        $evento = new Evento;
+        $evento->id = $request->id;
+        $evento->nombre = $request->nombre;
+        $evento->rut_nino = $request->rut_nino;
+        $evento->save();
     }
 
     /**
@@ -39,9 +38,9 @@ class EducadoraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Educadora $educadora)
+    public function show(Evento $evento)
     {
-        return $educadora;
+        return $evento;
     }
 
     /**
@@ -51,14 +50,13 @@ class EducadoraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Educadora $educadora)
+    public function update(Request $request, Evento $evento)
     {
-        $educadora->rut_educadora = $request->rut_educadora;
-        $educadora->nombre = $request->nombre;
-        $educadora->apellido = $request->apellido;
-        $educadora->id_nivel = $request->id_nivel;
-        $educadora->save();
-        return $educadora;
+        $evento->id = $request->id;
+        $evento->nombre = $request->nombre;
+        $evento->rut_nino = $request->rut_nino;
+        $evento->save();
+        return $evento;
     }
 
     /**
@@ -67,8 +65,8 @@ class EducadoraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Educadora $educadora)
+    public function destroy(Evento $evento)
     {
-        $educadora->delete();
+        $evento->delete();
     }
 }

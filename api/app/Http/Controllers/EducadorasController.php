@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Nivel;
+use App\Models\Educadora;
 use Illuminate\Http\Request;
 
-class NivelController extends Controller
+class EducadorasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class NivelController extends Controller
      */
     public function index()
     {
-        return Nivel::orderBy('nombre')->get();
+        return Educadora::orderBy('rut_educadora')->get();
     }
 
     /**
@@ -25,10 +25,12 @@ class NivelController extends Controller
      */
     public function store(Request $request)
     {
-        $nivel = new Nivel;
-        $nivel->id = $request->id;
-        $nivel->nombre = $request->nombre;
-        $nivel->save();
+        $educadora = new Educadora();
+        $educadora->rut_educadora = $request->rut_educadora;
+        $educadora->nombre = $request->nombre;
+        $educadora->apellido = $request->apellido;
+        $educadora->id_nivel = $request->id_nivel;
+        $educadora->save();
     }
 
     /**
@@ -37,9 +39,9 @@ class NivelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Nivel $nivel)
+    public function show(Educadora $educadora)
     {
-        return $nivel;
+        return $educadora;
     }
 
     /**
@@ -49,12 +51,14 @@ class NivelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nivel $nivel)
+    public function update(Request $request, Educadora $educadora)
     {
-        $nivel->id = $request->id;
-        $nivel->nombre = $request->nombre;
-        $nivel->save();
-        return $nivel;
+        $educadora->rut_educadora = $request->rut_educadora;
+        $educadora->nombre = $request->nombre;
+        $educadora->apellido = $request->apellido;
+        $educadora->id_nivel = $request->id_nivel;
+        $educadora->save();
+        return $educadora;
     }
 
     /**
@@ -63,8 +67,8 @@ class NivelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nivel $nivel)
+    public function destroy(Educadora $educadora)
     {
-        $nivel->delete();
+        $educadora->delete();
     }
 }
