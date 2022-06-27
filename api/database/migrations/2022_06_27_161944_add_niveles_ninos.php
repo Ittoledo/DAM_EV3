@@ -15,9 +15,7 @@ class AddNivelesNinos extends Migration
     {
         Schema::table('ninos', function (Blueprint $table){
             $table->unsignedBigInteger('id_nivel')->nullable();
-            $table->unsignedBigInteger('id_evento')->nullable();
             $table->foreign('id_nivel')->references('id')->on('niveles');
-            $table->foreign('id_evento')->references('id')->on('eventos');
         });
     }
 

@@ -14,9 +14,10 @@ class CreateNinosTable extends Migration
     public function up()
     {
         Schema::create('ninos', function (Blueprint $table) {
-            $table->integer('rut_nino')->primary();
+            $table->unsignedBigInteger('rut_nino')->primary();
             $table->string('nombre');
             $table->string('apellido');
+            $table->softDeletes();
         });
     }
 
