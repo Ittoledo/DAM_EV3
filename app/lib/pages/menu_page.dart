@@ -17,7 +17,7 @@ class _menuPageState extends State<menuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("MENU GUARDERIA"),
+        title: Text("MENU JARDIN"),
         backgroundColor: Colors.red[300],
         centerTitle: true,
       ),

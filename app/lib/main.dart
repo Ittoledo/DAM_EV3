@@ -1,3 +1,6 @@
+import 'package:app/pages/form_Ninos.dart';
+import 'package:app/pages/form_educadora.dart';
+import 'package:app/pages/lista_Eventos.dart';
 import 'package:app/pages/menu_page.dart';
 import 'package:flutter/material.dart';
 

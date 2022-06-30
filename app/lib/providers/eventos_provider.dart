@@ -12,11 +12,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-class NinosProvider {
+class eventosProvider {
   final String apiURL = 'http://10.0.2.2:8000/api';
 
   //Return list eventos
-  Future<List<dynamic>> getNiveles() async {
+  Future<List<dynamic>> getEventos() async {
     var uri = Uri.parse('$apiURL/eventos');
     var respuesta = await http.get(uri);
 
@@ -28,7 +28,7 @@ class NinosProvider {
   }
 
   //Return 1 evento
-  Future<LinkedHashMap<String, dynamic>> getNivel(BigInt id) async {
+  Future<LinkedHashMap<String, dynamic>> getEvento(BigInt id) async {
     var uri = Uri.parse('$apiURL/eventos/$id');
     var respuesta = await http.get(uri);
 
@@ -58,7 +58,7 @@ class NinosProvider {
   }
 
   //Edit 1 evento
-  Future<LinkedHashMap<String, dynamic>> nivelesEdit(
+  Future<LinkedHashMap<String, dynamic>> eventosEdit(
       BigInt id, String nombre, BigInt rut_nino) async {
     var uri = Uri.parse('$apiURL/eventos/$id');
     var respuesta = await http.patch(uri,
@@ -76,7 +76,7 @@ class NinosProvider {
   }
 
   //Delete 1 evento
-  Future<bool> nivelesDelete(BigInt id) async {
+  Future<bool> eventosDelete(BigInt id) async {
     var uri = Uri.parse('$apiURL/eventos/$id');
     var respuesta = await http.delete(uri);
     return respuesta.statusCode == 200;
