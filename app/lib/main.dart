@@ -2,6 +2,7 @@ import 'package:app/pages/form_Ninos.dart';
 import 'package:app/pages/form_educadora.dart';
 import 'package:app/pages/lista_Eventos.dart';
 import 'package:app/pages/menu_page.dart';
+import 'package:app/pages/news_Page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: menuPage(),
+      home: newsPage(),
     );
   }
 }

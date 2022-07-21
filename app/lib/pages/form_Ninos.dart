@@ -117,7 +117,7 @@ class _formNinosState extends State<formNinos> {
                     height: size.height * 0.05,
                   ),
                   Text(
-                    "Registro niño/a",
+                    "Registrar niño/a",
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.red[300],
@@ -140,8 +140,8 @@ class _formNinosState extends State<formNinos> {
                                 Icons.calendar_view_day,
                                 color: Colors.red[300],
                               ),
-                              labelText: 'numero de rut',
-                              helperText: '12.345.567-8',
+                              labelText: 'Rut',
+                              helperText: '123455678',
                               border: OutlineInputBorder(),
                               isDense: false,
                               contentPadding: EdgeInsets.all(10)),
@@ -176,7 +176,7 @@ class _formNinosState extends State<formNinos> {
                         ),
                         SizedBox(height: 20),
                         Container(
-                          alignment: Alignment.centerRight,
+                          alignment: Alignment.center,
                           width: double.infinity,
                           child: DropdownButton(
                             value: selectItem,

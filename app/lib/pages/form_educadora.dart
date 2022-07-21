@@ -135,6 +135,7 @@ class _formEduState extends State<formEdu> {
                         SizedBox(height: 20),
                         Container(
                           width: double.infinity,
+                          alignment: Alignment.centerRight,
                           child: ElevatedButton(
                             onPressed: () {
                               opciones(context);
@@ -142,7 +143,7 @@ class _formEduState extends State<formEdu> {
                             child: Text('selecciona una imagen'),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 40),
                         Container(
                           width: double.infinity,
                           child: ElevatedButton(

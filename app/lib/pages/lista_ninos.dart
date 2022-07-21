@@ -38,8 +38,8 @@ class listaNinos extends StatelessWidget {
                       child: Image.asset('assets/ui_profile.png',
                           fit: BoxFit.cover),
                     ),
-                    title: Text('Apellido: ' + nino['apellido']),
-                    subtitle: Text('Nombre: ' + nino['nombre']),
+                    title: Text('Rut: ' + nino['rut_nino'].toString()),
+                    subtitle: Text(nino['nombre'] + ' ' + nino['apellido']),
                   );
                 },
               );
