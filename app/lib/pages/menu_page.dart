@@ -1,5 +1,6 @@
 import 'package:app/pages/educadoras_Page.dart';
 import 'package:app/pages/eventos_Page.dart';
+import 'package:app/pages/news_Gestion.dart';
 import 'package:app/pages/ninos_Page.dart';
 import 'package:app/pages/niveles_Page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -55,6 +56,10 @@ class _menuPageState extends State<menuPage> {
                       if (index == 3) {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (_) => eventosPage()));
+                      }
+                      if (index == 4) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => newsGestion()));
                       }
                     },
                     child: Column(

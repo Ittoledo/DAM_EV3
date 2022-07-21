@@ -11,4 +11,5 @@ final Menu = [
   Categoria(2, "Educadoras", "ui_edu.png"),
   Categoria(3, "Niveles", "ui_niveles.png"),
   Categoria(4, "Eventos", "ui_evento.png"),
+  Categoria(5, "Noticias", "ui_news.png"),
 ];

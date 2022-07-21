@@ -1,4 +1,4 @@
-import 'package:app/listWidget.dart';
+import 'package:app/widgets/listWidget.dart';
 import 'package:app/pages/detalleNoticas.dart';
 import 'package:app/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';

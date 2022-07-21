@@ -74,7 +74,7 @@ class detalleNoticia extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 12.0),
+              padding: EdgeInsets.only(top: 40.0),
               child: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
