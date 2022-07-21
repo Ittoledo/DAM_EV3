@@ -1,4 +1,4 @@
-import 'package:app/pages/login_page.dart';
+import 'package:app/pages/news_Page.dart';
 import 'package:app/providers/google_sign_in_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: Login(),
+        home: newsPage(),
       ),
     );
   }

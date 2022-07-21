@@ -1,5 +1,8 @@
 import 'package:app/listWidget.dart';
 import 'package:app/pages/detalleNoticas.dart';
+import 'package:app/widgets/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:app/modelos/ListItems.dart';
 
@@ -145,6 +148,15 @@ class _newsPageState extends State<newsPage>
           )
         ],
       ),
+      drawer: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (BuildContext context, snapshot) {
+            if (snapshot.hasData) {
+              return const NavigationDrawer();
+            } else {
+              return const NavigationDrawerLoggedOut();
+            }
+          }),
     );
   }
 }

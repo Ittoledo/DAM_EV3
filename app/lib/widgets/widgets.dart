@@ -1,9 +1,11 @@
 import 'package:app/pages/login_page.dart';
+import 'package:app/pages/news_Page.dart';
 import 'package:app/providers/google_sign_in_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../pages/menu_page.dart';
@@ -178,13 +180,63 @@ class NavigationDrawer extends StatelessWidget {
           onTap: () {},
         ),
         ListTile(
+          leading: const Icon(MdiIcons.newspaper),
+          title: const Text('Noticias'),
+          onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => newsPage(),
+          )),
+        ),
+        ListTile(
           leading: const Icon(Icons.logout),
           title: const Text('Cerrar Sesion'),
           onTap: () {
             FirebaseAuth.instance.signOut();
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: ((context) => Login())));
+                MaterialPageRoute(builder: ((context) => newsPage())));
           },
+        ),
+      ],
+    );
+  }
+}
+
+class NavigationDrawerLoggedOut extends StatelessWidget {
+  const NavigationDrawerLoggedOut({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            buildHeaderLoggedOut(context),
+            buildMenuItemsLoggedOut(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildHeaderLoggedOut(BuildContext context) => Container(
+        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      );
+  Widget buildMenuItemsLoggedOut(BuildContext context) {
+    return Wrap(
+      runSpacing: 16,
+      children: [
+        ListTile(
+          leading: const Icon(Icons.person),
+          title: Text('Iniciar Sesion'),
+          onTap: () => Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => Login())),
+        ),
+        ListTile(
+          leading: const Icon(MdiIcons.newspaper),
+          title: const Text('Noticias'),
+          onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => newsPage(),
+          )),
         ),
       ],
     );
