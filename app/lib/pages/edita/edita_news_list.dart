@@ -1,15 +1,17 @@
-import 'package:app/providers/firebase_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:app/providers/firebase_service.dart';
 
-class ListaNews extends StatelessWidget {
-  const ListaNews({Key? key}) : super(key: key);
+import 'edita_news.dart';
+
+class EditaNewsList extends StatelessWidget {
+  const EditaNewsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista Noticias'),
+        title: Text('Lista News'),
         backgroundColor: Colors.red[300],
       ),
       body: Padding(
@@ -40,6 +42,18 @@ class ListaNews extends StatelessWidget {
                     ),
                     title: Text('Titulo: ' + news['titulo']),
                     subtitle: Text('Fecha: ' + news['fecha']),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => EditaNews(
+                                  news.id,
+                                  news['link'],
+                                  news['titulo'],
+                                  news['descripcion'],
+                                  news['fecha'],
+                                  news['hora'])));
+                    },
                   );
                 },
               );
