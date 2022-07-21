@@ -125,7 +125,7 @@ class _EditaNewsState extends State<EditaNews> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: descripcionCtrl,
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
                           maxLines: 5,
                           decoration: InputDecoration(
                               icon: Icon(
@@ -140,7 +140,7 @@ class _EditaNewsState extends State<EditaNews> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: fechaCtrl,
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                               icon: Icon(
                                 Icons.account_circle_outlined,
@@ -155,7 +155,7 @@ class _EditaNewsState extends State<EditaNews> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: horaCtrl,
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                               icon: Icon(
                                 Icons.account_circle_outlined,

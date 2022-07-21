@@ -1,10 +1,13 @@
+import 'package:app/providers/firebase_service.dart';
 import 'package:app/widgets/listWidget.dart';
 import 'package:app/pages/detalleNoticas.dart';
 import 'package:app/widgets/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:app/modelos/ListItems.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class newsPage extends StatefulWidget {
   newsPage({Key? key}) : super(key: key);
@@ -118,21 +121,47 @@ class _newsPageState extends State<newsPage>
         children: [
           Padding(
             padding: EdgeInsets.all(8.0),
-            child: Container(
-              child: ListView.builder(
-                itemCount: listTiles.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => detalleNoticia(
-                                    item: listTiles[index],
-                                    tag: listTiles[index].Titulo,
-                                  )));
+            child: Expanded(
+              child: StreamBuilder(
+                stream: FirestoreService().news(),
+                builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
+                  if (!snap.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return ListView.separated(
+                    separatorBuilder: (_, __) => Divider(),
+                    itemCount: snap.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      var news = snap.data!.docs[index];
+                      return ListTile(
+                        leading: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minWidth: 44,
+                            minHeight: 44,
+                            maxWidth: 64,
+                            maxHeight: 64,
+                          ),
+                          child: Image.network(news['link'], fit: BoxFit.cover),
+                        ),
+                        title: Text('Titulo: ' + news['titulo']),
+                        subtitle: Text('Fecha: ' + news['fecha']),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => detalleNoticia(
+                                      link: news['link'],
+                                      titulo: news['titulo'],
+                                      descripcion: news['descripcion'],
+                                      fecha: news['fecha'],
+                                      hora: news['hora'],
+                                      tag: news['titulo'])));
+                        },
+                      );
                     },
-                    child: listWidget(listTiles[index]),
+                    //coment
                   );
                 },
               ),
