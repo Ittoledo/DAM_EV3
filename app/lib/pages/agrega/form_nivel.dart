@@ -1,5 +1,5 @@
+import 'package:app/providers/firebase_service.dart';
 import 'package:flutter/material.dart';
-import 'package:app/providers/niveles_provider.dart';
 
 class formNivel extends StatefulWidget {
   const formNivel({Key? key}) : super(key: key);
@@ -12,11 +12,9 @@ class _formNivelState extends State<formNivel> {
   final formKey = GlobalKey<FormState>();
 
   TextEditingController idCtrl = TextEditingController();
-
   TextEditingController nombreCtrl = TextEditingController();
 
   String errId = '';
-
   String errNombre = '';
 
   @override
@@ -61,7 +59,7 @@ class _formNivelState extends State<formNivel> {
                                 Icons.calendar_view_day,
                                 color: Colors.red[300],
                               ),
-                              labelText: 'numero de id',
+                              labelText: 'Numero de id',
                               helperText: '1',
                               border: OutlineInputBorder(),
                               isDense: false,
@@ -86,31 +84,11 @@ class _formNivelState extends State<formNivel> {
                           width: double.infinity,
                           child: ElevatedButton(
                             child: Text('Agregar'),
-                            onPressed: () async {
-                              int idint = int.tryParse(idCtrl.text) ?? 0;
-                              ;
-                              BigInt id = BigInt.from(idint);
-
-                              var respuesta =
-                                  await nivelesProvider().nivelesAdd(
-                                id,
+                            onPressed: () {
+                              FirestoreService().nivelesAdd(
+                                idCtrl.text,
                                 nombreCtrl.text.trim(),
                               );
-
-                              if (respuesta['message'] != null) {
-                                //id_evento
-                                if (respuesta['errors']['id'] != null) {
-                                  errId = respuesta['errors']['id'][0];
-                                }
-
-                                //nombre
-                                if (respuesta['errors']['nombre'] != null) {
-                                  errNombre = respuesta['errors']['nombre'][0];
-                                }
-
-                                setState(() {});
-                                return;
-                              }
 
                               Navigator.pop(context);
                             },

@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:app/providers/firebase_service.dart';
 
-class EditaEducadora extends StatefulWidget {
+class EditaNivel extends StatefulWidget {
   final String id;
   final String nombre;
-  final String apellido;
-  final int? id_nivel;
-  EditaEducadora(this.id, this.nombre, this.apellido, this.id_nivel, {Key? key})
-      : super(key: key);
+  EditaNivel(this.id, this.nombre, {Key? key}) : super(key: key);
 
   @override
-  State<EditaEducadora> createState() => _EditaEducadoraState();
+  State<EditaNivel> createState() => _EditaNivelState();
 }
 
-class _EditaEducadoraState extends State<EditaEducadora> {
+class _EditaNivelState extends State<EditaNivel> {
   final formKey = GlobalKey<FormState>();
   TextEditingController nombreCtrl = TextEditingController();
-  TextEditingController apellidoCtrl = TextEditingController();
-  TextEditingController id_nivelCtrl = TextEditingController();
   String errNombre = '';
-  String errApellido = '';
-  String errId = '';
 
   opciones(Context) {
     showDialog(
@@ -40,15 +33,7 @@ class _EditaEducadoraState extends State<EditaEducadora> {
                               bottom:
                                   BorderSide(width: 1, color: Colors.grey))),
                       child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'tomar una foto',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          Icon(Icons.camera_alt, color: Colors.blue)
-                        ],
+                        children: [Icon(Icons.camera_alt, color: Colors.blue)],
                       ),
                     ),
                   )
@@ -79,7 +64,7 @@ class _EditaEducadoraState extends State<EditaEducadora> {
                     height: size.height * 0.05,
                   ),
                   Text(
-                    "Edicion educadora",
+                    "Edicion Nivel",
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.red[300],
@@ -108,55 +93,13 @@ class _EditaEducadoraState extends State<EditaEducadora> {
                               contentPadding: EdgeInsets.all(10)),
                         ),
                         SizedBox(height: 20),
-                        TextFormField(
-                          controller: apellidoCtrl,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                              icon: Icon(
-                                Icons.account_circle_outlined,
-                                color: Colors.red[300],
-                              ),
-                              labelText: 'Apellido',
-                              hintText: widget.apellido,
-                              border: OutlineInputBorder(),
-                              isDense: false,
-                              contentPadding: EdgeInsets.all(10)),
-                        ),
-                        SizedBox(height: 20),
-                        TextFormField(
-                          controller: id_nivelCtrl,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                              icon: Icon(
-                                Icons.account_circle_outlined,
-                                color: Colors.red[300],
-                              ),
-                              labelText: 'Nivel',
-                              hintText: widget.id_nivel.toString(),
-                              border: OutlineInputBorder(),
-                              isDense: false,
-                              contentPadding: EdgeInsets.all(10)),
-                        ),
-                        SizedBox(height: 20),
-                        Container(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              opciones(context);
-                            },
-                            child: Text('selecciona una imagen'),
-                          ),
-                        ),
-                        SizedBox(height: 20),
                         Container(
                           width: double.infinity,
                           child: ElevatedButton(
                             child: Text('Editar'),
                             onPressed: () {
-                              int id_nivel =
-                                  int.tryParse(id_nivelCtrl.text) ?? 0;
-                              FirestoreService().educadorasEditar(widget.id,
-                                  nombreCtrl.text, apellidoCtrl.text, id_nivel);
+                              FirestoreService()
+                                  .nivelesEditar(widget.id, nombreCtrl.text);
 
                               Navigator.pop(context);
                             },

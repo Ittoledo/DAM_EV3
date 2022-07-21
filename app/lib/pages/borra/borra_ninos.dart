@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:app/providers/firebase_service.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class borraEducadoras extends StatelessWidget {
-  const borraEducadoras({Key? key}) : super(key: key);
+class BorraNinos extends StatelessWidget {
+  const BorraNinos({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista Educadoras'),
+        title: Text('Lista Ninos'),
         backgroundColor: Colors.red[300],
       ),
       body: Padding(
         padding: EdgeInsets.all(5),
         child: Expanded(
           child: StreamBuilder(
-            stream: FirestoreService().educadoras(),
+            stream: FirestoreService().ninos(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
               if (!snap.hasData) {
                 return Center(
@@ -28,7 +28,7 @@ class borraEducadoras extends StatelessWidget {
                 separatorBuilder: (_, __) => Divider(),
                 itemCount: snap.data!.docs.length,
                 itemBuilder: (context, index) {
-                  var edu = snap.data!.docs[index];
+                  var nino = snap.data!.docs[index];
                   return ListTile(
                       leading: ConstrainedBox(
                         constraints: BoxConstraints(
@@ -40,12 +40,12 @@ class borraEducadoras extends StatelessWidget {
                         child: Image.asset('assets/ui_profile.png',
                             fit: BoxFit.cover),
                       ),
-                      title: Text('Apellido Eduadora: ' + edu['apellido']),
-                      subtitle: Text('Nombre Educadora: ' + edu['nombre']),
+                      title: Text('Apellido Nino: ' + nino['apellido']),
+                      subtitle: Text('Nombre Nino: ' + nino['nombre']),
                       trailing: TextButton(
                         child: Icon(MdiIcons.trashCan, color: Colors.red),
                         onPressed: () {
-                          FirestoreService().educadorasDelete(edu.id);
+                          FirestoreService().ninosDelete(nino.id);
                         },
                       ));
                 },

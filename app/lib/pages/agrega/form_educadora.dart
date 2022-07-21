@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app/providers/educadoras_service.dart';
+import 'package:app/providers/firebase_service.dart';
 
 class formEdu extends StatefulWidget {
   @override

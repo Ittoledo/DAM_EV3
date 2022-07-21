@@ -3,6 +3,9 @@ import 'package:app/pages/lista/lista_niveles.dart';
 import 'package:flutter/material.dart';
 import 'package:app/modelos/categoriaMenu.dart';
 
+import 'borra/borra_niveles.dart';
+import 'edita/edita_niveles_list.dart';
+
 class nivelesPage extends StatefulWidget {
   nivelesPage({Key? key}) : super(key: key);
 
@@ -40,6 +43,16 @@ class _nivelesPageState extends State<nivelesPage> {
                       if (index == 1) {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (_) => listaNiveles()));
+                      }
+                      if (index == 2) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => BorraNiveles()));
+                      }
+                      if (index == 3) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => EditaNivelesList()));
                       }
                     },
                     child: Column(

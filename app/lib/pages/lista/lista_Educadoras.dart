@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:app/providers/educadoras_service.dart';
+import 'package:app/providers/firebase_service.dart';
 
 class listaEducadoras extends StatelessWidget {
   const listaEducadoras({Key? key}) : super(key: key);

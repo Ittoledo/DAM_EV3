@@ -1,22 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:app/providers/eventos_service.dart';
+import 'package:app/providers/firebase_service.dart';
 
-class listaEventos extends StatelessWidget {
-  const listaEventos({Key? key}) : super(key: key);
+import 'edita_nivel.dart';
+
+class EditaNivelesList extends StatelessWidget {
+  const EditaNivelesList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista Eventos'),
+        title: Text('Lista Niveles'),
         backgroundColor: Colors.red[300],
       ),
       body: Padding(
         padding: EdgeInsets.all(5),
         child: Expanded(
-          child: FutureBuilder(
-            future: eventosProvider().getEventos(),
-            builder: (context, AsyncSnapshot snap) {
+          child: StreamBuilder(
+            stream: FirestoreService().niveles(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
               if (!snap.hasData) {
                 return Center(
                   child: CircularProgressIndicator(),
@@ -24,9 +27,9 @@ class listaEventos extends StatelessWidget {
               }
               return ListView.separated(
                 separatorBuilder: (_, __) => Divider(),
-                itemCount: snap.data.length,
+                itemCount: snap.data!.docs.length,
                 itemBuilder: (context, index) {
-                  var prod = snap.data[index];
+                  var nivel = snap.data!.docs[index];
                   return ListTile(
                     leading: ConstrainedBox(
                       constraints: BoxConstraints(
@@ -35,10 +38,17 @@ class listaEventos extends StatelessWidget {
                         maxWidth: 64,
                         maxHeight: 64,
                       ),
-                      child: Image.asset('assets/ui_evento.png',
+                      child: Image.asset('assets/ui_profile.png',
                           fit: BoxFit.cover),
                     ),
-                    title: Text('Nombre evento: ' + prod['nombre']),
+                    title: Text('Nivel: ' + nivel['nombre']),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) =>
+                                  EditaNivel(nivel.id, nivel['nombre'])));
+                    },
                   );
                 },
               );

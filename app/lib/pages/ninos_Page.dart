@@ -1,7 +1,10 @@
 import 'package:app/pages/agrega/form_Ninos.dart';
+import 'package:app/pages/borra/borra_ninos.dart';
 import 'package:app/pages/lista/lista_ninos.dart';
 import 'package:flutter/material.dart';
 import 'package:app/modelos/categoriaMenu.dart';
+
+import 'edita/edita_ninos_list.dart';
 
 class ninosPage extends StatefulWidget {
   ninosPage({Key? key}) : super(key: key);
@@ -40,6 +43,16 @@ class _ninosPageState extends State<ninosPage> {
                       if (index == 1) {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (_) => listaNinos()));
+                      }
+                      if (index == 2) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => BorraNinos()));
+                      }
+                      if (index == 3) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => EditaNinosList()));
                       }
                     },
                     child: Column(

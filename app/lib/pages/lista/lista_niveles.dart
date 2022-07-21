@@ -1,5 +1,6 @@
+import 'package:app/providers/firebase_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:app/providers/niveles_provider.dart';
 
 class listaNiveles extends StatelessWidget {
   const listaNiveles({Key? key}) : super(key: key);
@@ -14,9 +15,9 @@ class listaNiveles extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(5),
         child: Expanded(
-          child: FutureBuilder(
-            future: nivelesProvider().getNiveles(),
-            builder: (context, AsyncSnapshot snap) {
+          child: StreamBuilder(
+            stream: FirestoreService().niveles(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
               if (!snap.hasData) {
                 return Center(
                   child: CircularProgressIndicator(),
@@ -24,9 +25,9 @@ class listaNiveles extends StatelessWidget {
               }
               return ListView.separated(
                 separatorBuilder: (_, __) => Divider(),
-                itemCount: snap.data.length,
+                itemCount: snap.data!.docs.length,
                 itemBuilder: (context, index) {
-                  var prod = snap.data[index];
+                  var nivel = snap.data!.docs[index];
                   return ListTile(
                     leading: ConstrainedBox(
                       constraints: BoxConstraints(
@@ -38,7 +39,7 @@ class listaNiveles extends StatelessWidget {
                       child: Image.asset('assets/ui_niveles.png',
                           fit: BoxFit.cover),
                     ),
-                    title: Text('Nombre nivel: ' + prod['nombre']),
+                    title: Text('Nombre nivel: ' + nivel['nombre']),
                   );
                 },
               );

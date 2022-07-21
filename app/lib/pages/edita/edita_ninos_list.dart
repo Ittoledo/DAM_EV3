@@ -1,15 +1,19 @@
-import 'package:app/providers/firebase_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:app/providers/firebase_service.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class listaNinos extends StatelessWidget {
-  const listaNinos({Key? key}) : super(key: key);
+import 'edita_educadora.dart';
+import 'edita_nino.dart';
+
+class EditaNinosList extends StatelessWidget {
+  const EditaNinosList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista niños'),
+        title: Text('Lista Ninos'),
         backgroundColor: Colors.red[300],
       ),
       body: Padding(
@@ -39,8 +43,15 @@ class listaNinos extends StatelessWidget {
                       child: Image.asset('assets/ui_profile.png',
                           fit: BoxFit.cover),
                     ),
-                    title: Text('Apellido: ' + nino['apellido']),
-                    subtitle: Text('Nombre: ' + nino['nombre']),
+                    title: Text('Apellido Nino: ' + nino['apellido']),
+                    subtitle: Text('Nombre Nino: ' + nino['nombre']),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => EditaNino(nino.id, nino['nombre'],
+                                  nino['apellido'], nino['id_nivel'])));
+                    },
                   );
                 },
               );
