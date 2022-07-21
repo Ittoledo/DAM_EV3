@@ -1,3 +1,4 @@
+import 'package:app/pages/menu_page.dart';
 import 'package:app/pages/news_Page.dart';
 import 'package:app/providers/google_sign_in_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
