@@ -1,8 +1,12 @@
-import 'package:app/providers/firebase_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:app/providers/firebase_service.dart';
 
-class listaEventos extends StatelessWidget {
-  const listaEventos({Key? key}) : super(key: key);
+import 'edita_evento.dart';
+import 'edita_nivel.dart';
+
+class EditaEventosList extends StatelessWidget {
+  const EditaEventosList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,7 @@ class listaEventos extends StatelessWidget {
         child: Expanded(
           child: StreamBuilder(
             stream: FirestoreService().eventos(),
-            builder: (context, AsyncSnapshot snap) {
+            builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
               if (!snap.hasData) {
                 return Center(
                   child: CircularProgressIndicator(),
@@ -35,10 +39,18 @@ class listaEventos extends StatelessWidget {
                         maxWidth: 64,
                         maxHeight: 64,
                       ),
-                      child: Image.asset('assets/ui_evento.png',
+                      child: Image.asset('assets/ui_profile.png',
                           fit: BoxFit.cover),
                     ),
-                    title: Text('Nombre evento: ' + evento['nombre']),
+                    title: Text('Evento: ' + evento['nombre']),
+                    subtitle: Text('Rut Nino: ' + evento['rut_nino']),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => EditaEvento(evento.id,
+                                  evento['nombre'], evento['rut_nino'])));
+                    },
                   );
                 },
               );

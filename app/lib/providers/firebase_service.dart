@@ -129,4 +129,38 @@ class FirestoreService {
         .doc(id)
         .update({'nombre': nombre});
   }
+
+  Stream<QuerySnapshot> news() {
+    return FirebaseFirestore.instance.collection('news').snapshots();
+  }
+
+  Future newsAdd(String link, String titulo, String descripcion, String fecha,
+      String hora) {
+    return FirebaseFirestore.instance.collection('news').doc().set({
+      'link': link,
+      'titulo': titulo,
+      'descripcion': descripcion,
+      'fecha': fecha,
+      'hora': hora
+    });
+  }
+
+  Future newsDelete(String id) {
+    return FirebaseFirestore.instance.collection('news').doc(id).delete();
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getNews(String id) async {
+    return await FirebaseFirestore.instance.collection('news').doc(id).get();
+  }
+
+  Future newsEditar(String id, String link, String titulo, String descripcion,
+      String fecha, String hora) {
+    return FirebaseFirestore.instance.collection('news').doc(id).update({
+      'link': link,
+      'titulo': titulo,
+      'descripcion': descripcion,
+      'fecha': fecha,
+      'hora': hora
+    });
+  }
 }

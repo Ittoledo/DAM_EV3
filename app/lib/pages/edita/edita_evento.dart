@@ -1,28 +1,57 @@
-import 'package:app/providers/firebase_service.dart';
 import 'package:flutter/material.dart';
-import 'package:app/providers/eventos_service.dart';
+import 'package:app/providers/firebase_service.dart';
 
-class formEvento extends StatefulWidget {
-  const formEvento({Key? key}) : super(key: key);
+class EditaEvento extends StatefulWidget {
+  final String id;
+  final String nombre;
+  final String rut_nino;
+  EditaEvento(this.id, this.nombre, this.rut_nino, {Key? key})
+      : super(key: key);
 
   @override
-  State<formEvento> createState() => _formEventoState();
+  State<EditaEvento> createState() => _EditaEventoState();
 }
 
-class _formEventoState extends State<formEvento> {
+class _EditaEventoState extends State<EditaEvento> {
   final formKey = GlobalKey<FormState>();
   TextEditingController nombreCtrl = TextEditingController();
-  TextEditingController rutNinoCtrl = TextEditingController();
-
-  String errId = '';
-
+  TextEditingController rut_ninoCtrl = TextEditingController();
   String errNombre = '';
+  String errRut = '';
 
-  String errApellido = '';
+  opciones(Context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext Context) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.all(0),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom:
+                                  BorderSide(width: 1, color: Colors.grey))),
+                      child: Row(
+                        children: [Icon(Icons.camera_alt, color: Colors.blue)],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -39,7 +68,7 @@ class _formEventoState extends State<formEvento> {
                     height: size.height * 0.05,
                   ),
                   Text(
-                    "Registrar Evento",
+                    "Edicion Evento",
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.red[300],
@@ -61,21 +90,23 @@ class _formEventoState extends State<formEvento> {
                                 Icons.account_circle,
                                 color: Colors.red[300],
                               ),
-                              labelText: 'Nombre evento',
+                              labelText: 'Nombre',
+                              hintText: widget.nombre,
                               border: OutlineInputBorder(),
                               isDense: false,
                               contentPadding: EdgeInsets.all(10)),
                         ),
                         SizedBox(height: 20),
                         TextFormField(
-                          controller: rutNinoCtrl,
+                          controller: rut_ninoCtrl,
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                               icon: Icon(
-                                Icons.account_circle_outlined,
+                                Icons.account_circle,
                                 color: Colors.red[300],
                               ),
-                              labelText: 'rut nino',
+                              labelText: 'Rut Nino',
+                              hintText: widget.rut_nino,
                               border: OutlineInputBorder(),
                               isDense: false,
                               contentPadding: EdgeInsets.all(10)),
@@ -84,12 +115,11 @@ class _formEventoState extends State<formEvento> {
                         Container(
                           width: double.infinity,
                           child: ElevatedButton(
-                            child: Text('Agregar'),
+                            child: Text('Editar'),
                             onPressed: () {
-                              FirestoreService().eventosAdd(
-                                nombreCtrl.text,
-                                rutNinoCtrl.text,
-                              );
+                              FirestoreService().eventosEditar(widget.id,
+                                  nombreCtrl.text, rut_ninoCtrl.text);
+
                               Navigator.pop(context);
                             },
                           ),

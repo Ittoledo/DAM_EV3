@@ -3,6 +3,9 @@ import 'package:app/pages/lista/lista_Eventos.dart';
 import 'package:flutter/material.dart';
 import 'package:app/modelos/categoriaMenu.dart';
 
+import 'borra/borra_eventos.dart';
+import 'edita/edita_eventos_list.dart';
+
 class eventosPage extends StatefulWidget {
   eventosPage({Key? key}) : super(key: key);
 
@@ -40,6 +43,16 @@ class _eventosPageState extends State<eventosPage> {
                       if (index == 1) {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (_) => listaEventos()));
+                      }
+                      if (index == 2) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => BorraEventos()));
+                      }
+                      if (index == 3) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => EditaEventosList()));
                       }
                     },
                     child: Column(
