@@ -1,6 +1,5 @@
 import 'package:app/providers/firebase_service.dart';
 import 'package:flutter/material.dart';
-import 'package:app/providers/eventos_service.dart';
 
 class formEvento extends StatefulWidget {
   const formEvento({Key? key}) : super(key: key);
