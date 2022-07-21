@@ -1,5 +1,5 @@
-import 'package:app/pages/form_nivel.dart';
-import 'package:app/pages/lista_niveles.dart';
+import 'package:app/pages/agrega/form_nivel.dart';
+import 'package:app/pages/lista/lista_niveles.dart';
 import 'package:flutter/material.dart';
 import 'package:app/modelos/categoriaMenu.dart';
 

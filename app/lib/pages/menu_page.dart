@@ -2,8 +2,11 @@ import 'package:app/pages/educadoras_Page.dart';
 import 'package:app/pages/eventos_Page.dart';
 import 'package:app/pages/ninos_Page.dart';
 import 'package:app/pages/niveles_Page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:app/modelos/categoria.dart';
+
+import '../widgets/widgets.dart';
 
 class menuPage extends StatefulWidget {
   menuPage({Key? key}) : super(key: key);
@@ -67,6 +70,7 @@ class _menuPageState extends State<menuPage> {
                   ));
             }),
       ),
+      drawer: const NavigationDrawer(),
     );
   }
 }

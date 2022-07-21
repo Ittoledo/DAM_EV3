@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:app/providers/educadoras_provider.dart';
+import 'package:app/providers/educadoras_service.dart';
 
-class formEdu extends StatefulWidget {
+class EditaEducadora extends StatefulWidget {
+  final String id;
+  final String nombre;
+  final String apellido;
+  final int? id_nivel;
+  EditaEducadora(this.id, this.nombre, this.apellido, this.id_nivel, {Key? key})
+      : super(key: key);
+
   @override
-  State<formEdu> createState() => _formEduState();
+  State<EditaEducadora> createState() => _EditaEducadoraState();
 }
 
-class _formEduState extends State<formEdu> {
+class _EditaEducadoraState extends State<EditaEducadora> {
   final formKey = GlobalKey<FormState>();
-
-  TextEditingController rutCtrl = TextEditingController();
   TextEditingController nombreCtrl = TextEditingController();
   TextEditingController apellidoCtrl = TextEditingController();
   TextEditingController id_nivelCtrl = TextEditingController();
-
-  String errRut = '';
   String errNombre = '';
   String errApellido = '';
+  String errId = '';
 
   opciones(Context) {
     showDialog(
@@ -75,7 +79,7 @@ class _formEduState extends State<formEdu> {
                     height: size.height * 0.05,
                   ),
                   Text(
-                    "Registro educadora",
+                    "Edicion educadora",
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.red[300],
@@ -90,22 +94,6 @@ class _formEduState extends State<formEdu> {
                       children: [
                         SizedBox(height: 20),
                         TextFormField(
-                          validator: (String? valor) {},
-                          controller: rutCtrl,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                              icon: Icon(
-                                Icons.calendar_view_day,
-                                color: Colors.red[300],
-                              ),
-                              labelText: 'numero de rut',
-                              helperText: '123455678',
-                              border: OutlineInputBorder(),
-                              isDense: false,
-                              contentPadding: EdgeInsets.all(10)),
-                        ),
-                        SizedBox(height: 20),
-                        TextFormField(
                           controller: nombreCtrl,
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
@@ -114,6 +102,7 @@ class _formEduState extends State<formEdu> {
                                 color: Colors.red[300],
                               ),
                               labelText: 'Nombre',
+                              hintText: widget.nombre,
                               border: OutlineInputBorder(),
                               isDense: false,
                               contentPadding: EdgeInsets.all(10)),
@@ -128,6 +117,22 @@ class _formEduState extends State<formEdu> {
                                 color: Colors.red[300],
                               ),
                               labelText: 'Apellido',
+                              hintText: widget.apellido,
+                              border: OutlineInputBorder(),
+                              isDense: false,
+                              contentPadding: EdgeInsets.all(10)),
+                        ),
+                        SizedBox(height: 20),
+                        TextFormField(
+                          controller: id_nivelCtrl,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                              icon: Icon(
+                                Icons.account_circle_outlined,
+                                color: Colors.red[300],
+                              ),
+                              labelText: 'Nivel',
+                              hintText: widget.id_nivel.toString(),
                               border: OutlineInputBorder(),
                               isDense: false,
                               contentPadding: EdgeInsets.all(10)),
@@ -135,7 +140,6 @@ class _formEduState extends State<formEdu> {
                         SizedBox(height: 20),
                         Container(
                           width: double.infinity,
-                          alignment: Alignment.centerRight,
                           child: ElevatedButton(
                             onPressed: () {
                               opciones(context);
@@ -143,45 +147,16 @@ class _formEduState extends State<formEdu> {
                             child: Text('selecciona una imagen'),
                           ),
                         ),
-                        SizedBox(height: 40),
+                        SizedBox(height: 20),
                         Container(
                           width: double.infinity,
                           child: ElevatedButton(
-                            child: Text('Agregar'),
-                            onPressed: () async {
-                              int rut = int.tryParse(rutCtrl.text) ?? 0;
-                              int id_nivel = 1;
-
-                              var respuesta =
-                                  await educadorasProvider().educadorasAdd(
-                                rut,
-                                apellidoCtrl.text.trim(),
-                                nombreCtrl.text.trim(),
-                                id_nivel,
-                              );
-
-                              if (respuesta['message'] != null) {
-                                //Rut_educadora
-                                if (respuesta['errors']['rut_educadora'] !=
-                                    null) {
-                                  errRut =
-                                      respuesta['errors']['rut_educadora'][0];
-                                }
-
-                                //nombre
-                                if (respuesta['errors']['nombre'] != null) {
-                                  errNombre = respuesta['errors']['nombre'][0];
-                                }
-
-                                //Apellido
-                                if (respuesta['errors']['apellido'] != null) {
-                                  errApellido =
-                                      respuesta['errors']['apellido'][0];
-                                }
-
-                                setState(() {});
-                                return;
-                              }
+                            child: Text('Editar'),
+                            onPressed: () {
+                              int id_nivel =
+                                  int.tryParse(id_nivelCtrl.text) ?? 0;
+                              FirestoreService().educadorasEditar(widget.id,
+                                  nombreCtrl.text, apellidoCtrl.text, id_nivel);
 
                               Navigator.pop(context);
                             },

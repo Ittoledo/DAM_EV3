@@ -1,21 +1,21 @@
+import 'package:app/providers/ninos_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:app/providers/educadoras_provider.dart';
 
-class listaEducadoras extends StatelessWidget {
-  const listaEducadoras({Key? key}) : super(key: key);
+class listaNinos extends StatelessWidget {
+  const listaNinos({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista Educadoras'),
+        title: Text('Lista niños'),
         backgroundColor: Colors.red[300],
       ),
       body: Padding(
         padding: EdgeInsets.all(5),
         child: Expanded(
           child: FutureBuilder(
-            future: educadorasProvider().getEducadoras(),
+            future: NinosProvider().getNinos(),
             builder: (context, AsyncSnapshot snap) {
               if (!snap.hasData) {
                 return Center(
@@ -26,7 +26,7 @@ class listaEducadoras extends StatelessWidget {
                 separatorBuilder: (_, __) => Divider(),
                 itemCount: snap.data.length,
                 itemBuilder: (context, index) {
-                  var edu = snap.data[index];
+                  var nino = snap.data[index];
                   return ListTile(
                     leading: ConstrainedBox(
                       constraints: BoxConstraints(
@@ -38,8 +38,8 @@ class listaEducadoras extends StatelessWidget {
                       child: Image.asset('assets/ui_profile.png',
                           fit: BoxFit.cover),
                     ),
-                    title: Text('Apellido Eduadora: ' + edu['apellido']),
-                    subtitle: Text('Nombre Educadora: ' + edu['nombre']),
+                    title: Text('Apellido: ' + nino['apellido']),
+                    subtitle: Text('Nombre: ' + nino['nombre']),
                   );
                 },
               );

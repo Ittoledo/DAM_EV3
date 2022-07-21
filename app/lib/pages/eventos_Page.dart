@@ -1,5 +1,5 @@
-import 'package:app/pages/form_evento.dart';
-import 'package:app/pages/lista_Eventos.dart';
+import 'package:app/pages/agrega/form_evento.dart';
+import 'package:app/pages/lista/lista_Eventos.dart';
 import 'package:flutter/material.dart';
 import 'package:app/modelos/categoriaMenu.dart';
 

@@ -1,7 +1,10 @@
-import 'package:app/pages/lista_Educadoras.dart';
+import 'package:app/pages/edita/edita_educadoras_list.dart';
 import 'package:flutter/material.dart';
-import 'package:app/pages/form_educadora.dart';
+import 'package:app/pages/agrega/form_educadora.dart';
 import 'package:app/modelos/categoriaMenu.dart';
+
+import 'borra/borra_educadoras.dart';
+import 'lista/lista_Educadoras.dart';
 
 class educadorasPage extends StatefulWidget {
   educadorasPage({Key? key}) : super(key: key);
@@ -42,6 +45,18 @@ class _educadorasPageState extends State<educadorasPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (_) => listaEducadoras()));
+                      }
+                      if (index == 2) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => borraEducadoras()));
+                      }
+                      if (index == 3) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => EditaEducadoraList()));
                       }
                     },
                     child: Column(

@@ -1,22 +1,23 @@
-import 'package:app/providers/ninos_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:app/providers/educadoras_service.dart';
 
-class listaNinos extends StatelessWidget {
-  const listaNinos({Key? key}) : super(key: key);
+class listaEducadoras extends StatelessWidget {
+  const listaEducadoras({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista niños'),
+        title: Text('Lista Educadoras'),
         backgroundColor: Colors.red[300],
       ),
       body: Padding(
         padding: EdgeInsets.all(5),
         child: Expanded(
-          child: FutureBuilder(
-            future: NinosProvider().getNinos(),
-            builder: (context, AsyncSnapshot snap) {
+          child: StreamBuilder(
+            stream: FirestoreService().educadoras(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
               if (!snap.hasData) {
                 return Center(
                   child: CircularProgressIndicator(),
@@ -24,9 +25,9 @@ class listaNinos extends StatelessWidget {
               }
               return ListView.separated(
                 separatorBuilder: (_, __) => Divider(),
-                itemCount: snap.data.length,
+                itemCount: snap.data!.docs.length,
                 itemBuilder: (context, index) {
-                  var nino = snap.data[index];
+                  var edu = snap.data!.docs[index];
                   return ListTile(
                     leading: ConstrainedBox(
                       constraints: BoxConstraints(
@@ -38,8 +39,8 @@ class listaNinos extends StatelessWidget {
                       child: Image.asset('assets/ui_profile.png',
                           fit: BoxFit.cover),
                     ),
-                    title: Text('Rut: ' + nino['rut_nino'].toString()),
-                    subtitle: Text(nino['nombre'] + ' ' + nino['apellido']),
+                    title: Text('Apellido Eduadora: ' + edu['apellido']),
+                    subtitle: Text('Nombre Educadora: ' + edu['nombre']),
                   );
                 },
               );

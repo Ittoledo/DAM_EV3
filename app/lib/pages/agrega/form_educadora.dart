@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:app/providers/ninos_provider.dart';
+import 'package:app/providers/educadoras_service.dart';
 
-class formNinos extends StatefulWidget {
+class formEdu extends StatefulWidget {
   @override
-  State<formNinos> createState() => _formNinosState();
+  State<formEdu> createState() => _formEduState();
 }
 
-class _formNinosState extends State<formNinos> {
-  List<String> items = ['medio menor', 'medio mayor', 'Playgroup'];
-  String? selectItem = 'medio menor';
+class _formEduState extends State<formEdu> {
   final formKey = GlobalKey<FormState>();
 
   TextEditingController rutCtrl = TextEditingController();
@@ -49,46 +47,6 @@ class _formNinosState extends State<formNinos> {
                         ],
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      padding: EdgeInsets.all(20),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'selecciona una foto',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          Icon(Icons.image, color: Colors.blue)
-                        ],
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.red[300],
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'CANCELAR',
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                   )
                 ],
               ),
@@ -117,7 +75,7 @@ class _formNinosState extends State<formNinos> {
                     height: size.height * 0.05,
                   ),
                   Text(
-                    "Registrar niño/a",
+                    "Registro educadora",
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.red[300],
@@ -134,13 +92,13 @@ class _formNinosState extends State<formNinos> {
                         TextFormField(
                           validator: (String? valor) {},
                           controller: rutCtrl,
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                               icon: Icon(
                                 Icons.calendar_view_day,
                                 color: Colors.red[300],
                               ),
-                              labelText: 'Rut',
+                              labelText: 'numero de rut',
                               helperText: '123455678',
                               border: OutlineInputBorder(),
                               isDense: false,
@@ -176,26 +134,7 @@ class _formNinosState extends State<formNinos> {
                         ),
                         SizedBox(height: 20),
                         Container(
-                          alignment: Alignment.center,
                           width: double.infinity,
-                          child: DropdownButton(
-                            value: selectItem,
-                            items: items
-                                .map((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: TextStyle(fontSize: 24),
-                                    )))
-                                .toList(),
-                            onChanged: (item) =>
-                                setState(() => selectItem = item.toString()),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
                           child: ElevatedButton(
                             onPressed: () {
                               opciones(context);
@@ -208,37 +147,15 @@ class _formNinosState extends State<formNinos> {
                           width: double.infinity,
                           child: ElevatedButton(
                             child: Text('Agregar'),
-                            onPressed: () async {
-                              int rutint = int.tryParse(rutCtrl.text) ?? 0;
-                              int id_nivel = int.tryParse(rutCtrl.text) ?? 0;
-                              BigInt rut = BigInt.from(rutint);
-                              var respuesta = await NinosProvider().ninosAdd(
+                            onPressed: () {
+                              String rut = rutCtrl.text;
+
+                              FirestoreService().educadorasAdd(
                                 rut,
-                                apellidoCtrl.text.trim(),
                                 nombreCtrl.text.trim(),
-                                id_nivel,
+                                apellidoCtrl.text.trim(),
+                                null,
                               );
-
-                              if (respuesta['message'] != null) {
-                                //Rut_nino
-                                if (respuesta['errors']['rut_nino'] != null) {
-                                  errRut = respuesta['errors']['rut_nino'][0];
-                                }
-
-                                //nombre
-                                if (respuesta['errors']['nombre'] != null) {
-                                  errNombre = respuesta['errors']['nombre'][0];
-                                }
-
-                                //Apellido
-                                if (respuesta['errors']['apellido'] != null) {
-                                  errApellido =
-                                      respuesta['errors']['apellido'][0];
-                                }
-
-                                setState(() {});
-                                return;
-                              }
 
                               Navigator.pop(context);
                             },
