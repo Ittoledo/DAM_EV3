@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 import 'package:app/pages/edita/edita_educadoras_list.dart';
 import 'package:flutter/material.dart';
 import 'package:app/pages/agrega/form_educadora.dart';
 import 'package:app/modelos/categoriaMenu.dart';
+=======
+import 'package:flutter/material.dart';
+>>>>>>> parent of db7298e (forms)
 
 import 'borra/borra_educadoras.dart';
 import 'lista/lista_Educadoras.dart';
@@ -19,6 +23,7 @@ class _educadorasPageState extends State<educadorasPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Gestion de Educadoras"),
+<<<<<<< HEAD
         backgroundColor: Colors.red[300],
         centerTitle: true,
       ),
@@ -71,6 +76,8 @@ class _educadorasPageState extends State<educadorasPage> {
                     ),
                   ));
             }),
+=======
+>>>>>>> parent of db7298e (forms)
       ),
     );
   }

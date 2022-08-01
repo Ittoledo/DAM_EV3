@@ -1,8 +1,10 @@
+<<<<<<< HEAD
 import 'package:app/pages/agrega/form_Ninos.dart';
 import 'package:app/pages/borra/borra_ninos.dart';
 import 'package:app/pages/lista/lista_ninos.dart';
+=======
+>>>>>>> parent of db7298e (forms)
 import 'package:flutter/material.dart';
-import 'package:app/modelos/categoriaMenu.dart';
 
 import 'edita/edita_ninos_list.dart';
 
@@ -19,6 +21,7 @@ class _ninosPageState extends State<ninosPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Gestion de Niños"),
+<<<<<<< HEAD
         backgroundColor: Colors.red[300],
         centerTitle: true,
       ),
@@ -67,6 +70,8 @@ class _ninosPageState extends State<ninosPage> {
                     ),
                   ));
             }),
+=======
+>>>>>>> parent of db7298e (forms)
       ),
     );
   }

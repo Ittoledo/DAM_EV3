@@ -1,7 +1,9 @@
+<<<<<<< HEAD
 import 'package:app/pages/agrega/form_evento.dart';
 import 'package:app/pages/lista/lista_Eventos.dart';
+=======
+>>>>>>> parent of db7298e (forms)
 import 'package:flutter/material.dart';
-import 'package:app/modelos/categoriaMenu.dart';
 
 import 'borra/borra_eventos.dart';
 import 'edita/edita_eventos_list.dart';
@@ -19,6 +21,7 @@ class _eventosPageState extends State<eventosPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Gestion de Eventos"),
+<<<<<<< HEAD
         backgroundColor: Colors.red[300],
         centerTitle: true,
       ),
@@ -67,6 +70,8 @@ class _eventosPageState extends State<eventosPage> {
                     ),
                   ));
             }),
+=======
+>>>>>>> parent of db7298e (forms)
       ),
     );
   }

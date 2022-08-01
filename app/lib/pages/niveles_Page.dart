@@ -1,7 +1,9 @@
+<<<<<<< HEAD
 import 'package:app/pages/agrega/form_nivel.dart';
 import 'package:app/pages/lista/lista_niveles.dart';
+=======
+>>>>>>> parent of db7298e (forms)
 import 'package:flutter/material.dart';
-import 'package:app/modelos/categoriaMenu.dart';
 
 import 'borra/borra_niveles.dart';
 import 'edita/edita_niveles_list.dart';
@@ -19,6 +21,7 @@ class _nivelesPageState extends State<nivelesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Gestion de Niveles"),
+<<<<<<< HEAD
         backgroundColor: Colors.red[300],
         centerTitle: true,
       ),
@@ -67,6 +70,8 @@ class _nivelesPageState extends State<nivelesPage> {
                     ),
                   ));
             }),
+=======
+>>>>>>> parent of db7298e (forms)
       ),
     );
   }
