@@ -37,14 +37,14 @@ class BorraNews extends StatelessWidget {
                           maxWidth: 64,
                           maxHeight: 64,
                         ),
-                        child: Image.network(news['link'], fit: BoxFit.cover),
+                        child: Image.asset(news['link'], fit: BoxFit.cover),
                       ),
                       title: Text('Titulo: ' + news['titulo']),
                       subtitle: Text('Fecha: ' + news['fecha']),
                       trailing: TextButton(
                         child: Icon(MdiIcons.trashCan, color: Colors.red),
                         onPressed: () {
-                          FirestoreService().newsDelete(news.id);
+                          FirestoreService().ninosDelete(news.id);
                         },
                       ));
                 },

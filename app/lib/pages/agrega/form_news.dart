@@ -113,7 +113,7 @@ class _FormNewsState extends State<FormNews> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: descripcionCtrl,
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.number,
                           maxLines: 5,
                           decoration: InputDecoration(
                               icon: Icon(
@@ -128,7 +128,7 @@ class _FormNewsState extends State<FormNews> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: fechaCtrl,
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                               icon: Icon(
                                 Icons.account_circle_outlined,
@@ -142,7 +142,7 @@ class _FormNewsState extends State<FormNews> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: horaCtrl,
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                               icon: Icon(
                                 Icons.account_circle_outlined,

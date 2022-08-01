@@ -1,24 +1,11 @@
 import 'package:app/modelos/ListItems.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class detalleNoticia extends StatelessWidget {
   final String tag;
-  final String link;
-  final String titulo;
-  final String descripcion;
-  final String fecha;
-  final String hora;
+  final ListItem item;
 
-  detalleNoticia(
-      {Key? key,
-      required this.link,
-      required this.titulo,
-      required this.descripcion,
-      required this.fecha,
-      required this.hora,
-      required this.tag})
+  detalleNoticia({Key? key, required this.item, required this.tag})
       : super(key: key);
 
   @override
@@ -32,7 +19,7 @@ class detalleNoticia extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Hero(tag: '${titulo}', child: Image.network(link)),
+                  Hero(tag: '${item.Titulo}', child: Image.network(item.Img)),
                   SizedBox(
                     height: 10.0,
                   ),
@@ -41,7 +28,7 @@ class detalleNoticia extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          titulo,
+                          item.Titulo,
                           style: TextStyle(
                             fontSize: 22.0,
                             fontWeight: FontWeight.w500,
@@ -54,7 +41,7 @@ class detalleNoticia extends StatelessWidget {
                           children: [
                             Icon(Icons.lock_clock),
                             Text(
-                              hora,
+                              item.Hora,
                               style: TextStyle(
                                 fontSize: 12.0,
                               ),
@@ -64,7 +51,7 @@ class detalleNoticia extends StatelessWidget {
                             ),
                             Icon(Icons.date_range),
                             Text(
-                              hora,
+                              item.Hora,
                               style: TextStyle(
                                 fontSize: 12.0,
                               ),
@@ -75,7 +62,7 @@ class detalleNoticia extends StatelessWidget {
                           height: 20.0,
                         ),
                         Text(
-                          descripcion,
+                          item.Contenido,
                           style: TextStyle(
                             fontSize: 18.0,
                           ),
